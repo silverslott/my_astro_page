@@ -76,14 +76,14 @@ const { meta } = Astro.props;
     function loadGoogleAnalytics() {
       const script = document.createElement('script');
       script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-7YKMWLRCBW";
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-H5R1XF3HSX";
       document.head.appendChild(script);
 
       script.onload = function() {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-7YKMWLRCBW');
+        gtag('config', 'G-H5R1XF3HSX');
       };
     }
 
