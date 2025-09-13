@@ -40,7 +40,7 @@
   export default {
     methods: {
       sendEmail() {
-        emailjs.sendForm('service_vpb86sm', 'template_ngd8q4q', this.$refs.form, 'r7hsWHBRKXZsjeT5p')
+        emailjs.sendForm('service_ntssucp', 'template_jtttvzi', this.$refs.form, 'V_0N_aAB_-CJoe-oY')
           .then((result) => {
               console.log('SUCCESS!', result.text);
               alert("Your message has been sent!");
