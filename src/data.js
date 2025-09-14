@@ -27,7 +27,7 @@ export const footerData = {
   personalIcons: [
     {icon: 'mdi:chart-line'},
     {icon: 'ic:round-computer'},
-    {icon: 'emojione-monotone:lion-face'},
+    {icon: 'grommet-icons:test'},
     {icon: 'maki:gaming'}
   ]
 };

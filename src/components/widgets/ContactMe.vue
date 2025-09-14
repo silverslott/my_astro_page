@@ -2,17 +2,17 @@
   <section class="relative bg-gradient-to-b from-white to-white">
     <div class="max-w-6xl mx-auto px-4">
       <div class="py-[100px]">
-        <div class="max-w-3xl mx-auto bg-gradient-to-r from-blue-200 to-yellow-700 text-center p-6 rounded-md shadow-sm shadow-white mb-5">
+        <div class="max-w-3xl mx-auto bg-slate-300 border-4 border-green-500 text-center p-6 rounded-md shadow-sm shadow-white mb-5">
           <h2 class="text-4xl md:text-4xl font-bold leading-tighter tracking-tighter mb-12 font-heading">Contact</h2>
           <form ref="form" @submit.prevent="sendEmail">
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-1">
               <div>
                 <label for="user_name" class="font-bold max-sm:text-sm">Name:</label>
                 <input type="text" id="user_name" name="name" class="ml-1">
               </div>
               <div>
                 <label for="user_email" class="font-bold max-sm:text-sm">E-mail:</label>
-                <input type="email" id="user_email" name="email" class="ml-1">
+                <input type="email" id="user_email" name="email" class="ml-1 text-sm sm:text-base">
               </div>
             </div>
             <div class="grid grid-cols-1 mt-5">
@@ -23,8 +23,8 @@
                 <textarea id="message" name="message" rows="3"></textarea>
               </div>
               <div class="mt-4">
-                <button class="btn bg-yellow-950 hover:bg-blue-200 text-white hover:text-black font-bold border-4 
-                border-yellow-800" type="submit">Talk to me!</button>
+                <button class="btn bg-black hover:bg-green-500 text-white hover:text-black hover:border-green-100 font-bold border-4 
+                border-green-300" type="submit">Talk to me!</button>
               </div>
             </div>
           </form>
