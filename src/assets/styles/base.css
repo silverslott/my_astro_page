@@ -114,6 +114,15 @@
   background-color: #42ed80;
 }
 
+.hero-bg {
+  background: linear-gradient(to bottom,
+  rgb(254, 212, 178) 0%,
+  rgb(255, 247, 185) 5%,
+  rgb(255, 253, 234) 10%,
+  rgb(255, 255, 255) 100%
+  )
+}
+
 .dropdown:hover .dropdown-menu {
   display: block;
 }
