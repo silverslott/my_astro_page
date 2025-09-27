@@ -1,8 +1,8 @@
 <template>
-  <section class="relative bg-gradient-to-b from-white via-yellow-100 to-orange-100">
+  <section class="relative bg-gradient-to-b from-white to-yellow-100">
     <div class="max-w-6xl mx-auto px-4">
       <div class="py-[100px]">
-        <div class="max-w-3xl mx-auto bg-slate-300 border-4 border-green-500 text-center p-6 rounded-md shadow-sm shadow-white mb-5">
+        <div class="max-w-3xl mx-auto bg-slate-300 border-4 border-green-400 text-center p-6 rounded-md shadow-sm shadow-white mb-5">
           <h2 class="text-4xl md:text-4xl font-bold leading-tighter tracking-tighter mb-12 font-heading">Contact</h2>
           <form ref="form" @submit.prevent="sendEmail">
             <div class="grid grid-cols-2 gap-1">

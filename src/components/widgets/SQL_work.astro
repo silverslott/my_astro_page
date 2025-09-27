@@ -1,0 +1,113 @@
+<section class="relative">
+  <div class="absolute inset-0 bg-gradient-to-b from-white via-indigo-300 to-indigo-400" 
+      aria-hidden="true"></div>
+  <div class="relative max-w-5xl md:w-[700px] max-sm:w-[300px] mx-auto px-auto">
+    <div class="lg:py-8 mt-5 md:pb-12 max-sm:py-1 pt-12">
+      <div class="mt-[70px] sql-console h-[430px]">
+        <pre id="sql-query"></pre>
+        <div id="sql-result" class="hidden overflow-x-auto max-w-full"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const query = `
+  SELECT work_exp 
+  FROM sofia_info 
+  ORDER BY date DESC`;
+
+  const result = `
+  +----------------------+-----------------------+--------------+
+  | Company              | Role                  | Years        |
+  +----------------------+-----------------------+--------------+
+  | LeoVegas             | CRO Analyst           | 2024 - ...   |
+  | SciLifeLab           | Bioinformatician      | 2018 - 2024  |
+  | Karolinska Institute | Laboratory Technician | 2017 - 2018  |
+  | Octapharma           | Laboratory Engineer   | 2015 - 2016  |
+  | Karolinska Hospital  | Laboratory Engineer   | 2014 - 2015  | 
+  +----------------------+----------------+---------------------+
+  -- 5 rows returned
+`;
+
+  const keywords = ["work_exp", "sofia_info"];
+  const queryEl = document.getElementById("sql-query");
+  const resultEl = document.getElementById("sql-result");
+
+  // Split query into characters for typewriter effect
+  const chars = query.split("");
+  let i = 0;
+
+  function typeWriter() {
+    if (i < chars.length) {
+      const char = chars[i];
+      let span = document.createElement("span");
+
+      // Check if the current character is part of a keyword
+      let keywordMatch = null;
+      for (let kw of keywords) {
+        if (query.substring(i, i + kw.length) === kw) {
+          keywordMatch = kw;
+          break;
+        }
+      }
+
+      if (keywordMatch) {
+        // Type the whole keyword at once
+        span.textContent = keywordMatch;
+        span.style.color = "#99ff99";
+        queryEl.appendChild(span);
+        i += keywordMatch.length;
+      } else {
+        // Normal character
+        span.textContent = char;
+        queryEl.appendChild(span);
+        i++;
+      }
+
+      setTimeout(typeWriter,120);
+    } else {
+      // Show result after typing finishes
+      setTimeout(() => {
+        resultEl.classList.remove("hidden");
+        resultEl.innerText = result;
+      }, 600);
+    }
+  }
+
+  typeWriter();
+</script>
+
+<style>
+  .sql-console {
+    background: #1e1e1e;
+    color: #ffffff;
+    font-family: "Fira Code", monospace;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 5rem;
+  }
+
+  #sql-query {
+    white-space: pre-wrap;
+  }
+
+  #sql-query::after {
+    content: "|";
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  #sql-result {
+  margin-top: 1rem;
+  color: #feffae;
+  white-space: pre; /* keep monospace formatting */
+  overflow-x: auto; /* allow scrolling */
+  max-width: 100%;  /* ensure it doesn’t exceed container */
+}
+
+</style>
