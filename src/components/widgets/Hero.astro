@@ -21,6 +21,7 @@ const {
   subtitle = await Astro.slots.render('subtitle'),
   image = await Astro.slots.render('image'),
 } = Astro.props;
+
 ---
 
 <section class="relative md:-mt-[76px]">
@@ -68,7 +69,11 @@ const {
           {subtitle && <h2 class="text-xl max-sm:text-xs mb-3 md:text-xl text-yellow-950 font-medium font-code" set:html={subtitle} />}
         </div>
       </div>
-      <span class="text-4xl">👩🏼‍🔬</span><span class="text-3xl">🧪</span>
+      <div id="ab-test-container" class="mt-5">
+        <button data-variant="A">Variant A</button>
+        <button data-variant="B">Variant B</button>
+        <button data-variant="C">Variant C</button>
+      </div>      
     </div>
     <div class="lg:columns-2 md:columns-2 lg:col-span-1 md:col-span-2 max-sm:col-span-1 lg:mx-[20px] lg:mt-[40px] lg:mb-[40px] md:mx-[40px] max-sm:mx-[20px] lg:text-xl 
       md:mt-[40px] max-sm:my-5 max-sm:text-center">
@@ -94,3 +99,94 @@ const {
     </div>
   </div>
 </section>
+
+<script client:load>
+  const ABTest = {
+    testId: 'header_color_test',
+    variants: {
+      A: '#FD7CDF',
+      B: '#FFD048',
+      C: '#838EF8'
+    },
+    originalColor: ''
+  };
+
+  const header = document.querySelector('.sofia-title');
+  if (header) {
+    ABTest.originalColor = header.style.color || getComputedStyle(header).color;
+  }
+
+  function setVariant(variant) {
+    const savedVariant = localStorage.getItem(`ab_test_${ABTest.testId}`);
+
+    if (savedVariant === variant) {
+      localStorage.removeItem(`ab_test_${ABTest.testId}`);
+      applyVariant(null);
+    } else {
+      localStorage.setItem(`ab_test_${ABTest.testId}`, variant);
+      applyVariant(variant);
+    }
+  }
+
+  function applyVariant(variant) {
+    if (header) {
+      if (!variant) {
+        header.style.color = ABTest.originalColor;
+      } else {
+        header.style.color = ABTest.variants[variant];
+      }
+    }
+  }
+
+  const savedVariant = localStorage.getItem(`ab_test_${ABTest.testId}`);
+  if (savedVariant) applyVariant(savedVariant);
+
+  document.querySelectorAll('#ab-test-container button').forEach(button => {
+    button.addEventListener('click', () => {
+      const variant = button.dataset.variant;
+      setVariant(variant);
+    });
+  });
+</script>
+
+
+<style>
+  #ab-test-container button {
+    background-color: #f0f0f0;
+    border: 2px solid #333;
+    color: #333;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+
+  #ab-test-container button:hover {
+    background-color: #ddd;
+    transform: scale(1.05);
+  }
+
+  #ab-test-container button:active {
+    transform: scale(0.95);
+  }
+
+  #ab-test-container button[data-variant="A"] {
+    background-color: #FD7CDF;
+    color: black;
+    border-color: #8c457b;
+  }
+
+  #ab-test-container button[data-variant="B"] {
+    background-color: #FFD048;
+    color: black;
+    border-color: #9a7e29;
+  }
+
+  #ab-test-container button[data-variant="C"] {
+    background-color: #838EF8;
+    color: black;
+    border-color: #4b5294;
+  }
+</style>
