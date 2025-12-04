@@ -72,7 +72,7 @@ const {
       <div id="ab-test-container" class="mt-5">
         <button data-variant="A">Variant A</button>
         <button data-variant="B">Variant B</button>
-        <button data-variant="C">Variant C</button>
+        <button data-variant="Original">Original</button>
       </div>      
     </div>
     <div class="lg:columns-2 md:columns-2 lg:col-span-1 md:col-span-2 max-sm:col-span-1 lg:mx-[20px] lg:mt-[40px] lg:mb-[40px] md:mx-[40px] max-sm:mx-[20px] lg:text-xl 
@@ -102,19 +102,29 @@ const {
 
 <script client:load>
   const ABTest = {
-    testId: 'header_color_test',
-    variants: {
-      A: '#FD7CDF',
-      B: '#FFD048',
-      C: '#838EF8'
-    },
-    originalColor: ''
-  };
+  testId: 'header_color_test',
+  variants: {
+    A: { text: '#FFD048', border: '#FFD048', hero: 'linear-gradient(to bottom, rgb(247, 255, 162) 0%, rgb(248, 244, 255) 3%, rgb(253, 253, 255) 5%, rgb(255, 255, 255) 100%)' },
+    B: { text: '#838EF8', border: '#838EF8', hero: 'linear-gradient(to bottom, rgb(162, 255, 181) 0%, rgb(248, 244, 255) 3%, rgb(253, 253, 255) 5%, rgb(255, 255, 255) 100%)' },
+    Original: { text: '#1EC05A', border: '#1EC05A', hero: 'linear-gradient(to bottom, rgb(170, 162, 255) 0%, rgb(248, 244, 255) 3%, rgb(253, 253, 255) 5%, rgb(255, 255, 255) 100%)' }
+  },
+  originalTextColor: '',
+  originalBorderColor: '',
+  originalHeroBg: ''
+};
 
-  const header = document.querySelector('.sofia-title');
-  if (header) {
-    ABTest.originalColor = header.style.color || getComputedStyle(header).color;
-  }
+const header = document.getElementById('header');
+const title = document.querySelector('.sofia-title');
+const hero = document.getElementById('hero-bg');
+
+if (title) {
+  ABTest.originalTextColor = title.style.color || getComputedStyle(title).color;
+}
+
+if (header) {
+  ABTest.originalBorderColor =
+    header.style.borderColor || getComputedStyle(header).borderColor;
+}
 
   function setVariant(variant) {
     const savedVariant = localStorage.getItem(`ab_test_${ABTest.testId}`);
@@ -129,14 +139,23 @@ const {
   }
 
   function applyVariant(variant) {
-    if (header) {
-      if (!variant) {
-        header.style.color = ABTest.originalColor;
-      } else {
-        header.style.color = ABTest.variants[variant];
-      }
-    }
+    if (!title || !header || !hero) return;
+
+    if (!variant) {
+    title.style.color = ABTest.originalTextColor;
+    header.style.borderColor = ABTest.originalBorderColor;
+    hero.style.background = ABTest.originalHeroBg;
+    return;
   }
+
+  const { text, border, hero: heroBg } = ABTest.variants[variant];
+
+
+  title.style.color = text;
+  header.style.borderColor = border;
+  hero.style.background = heroBg;
+}
+
 
   const savedVariant = localStorage.getItem(`ab_test_${ABTest.testId}`);
   if (savedVariant) applyVariant(savedVariant);
@@ -173,20 +192,20 @@ const {
   }
 
   #ab-test-container button[data-variant="A"] {
-    background-color: #FD7CDF;
-    color: black;
-    border-color: #8c457b;
-  }
-
-  #ab-test-container button[data-variant="B"] {
     background-color: #FFD048;
     color: black;
     border-color: #9a7e29;
   }
 
-  #ab-test-container button[data-variant="C"] {
+  #ab-test-container button[data-variant="B"] {
     background-color: #838EF8;
     color: black;
     border-color: #4b5294;
+  }
+
+  #ab-test-container button[data-variant="Original"] {
+    background-color: #1EC05A;
+    color: black;
+    border-color: #27683f;
   }
 </style>
