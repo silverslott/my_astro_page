@@ -1,0 +1,52 @@
+---
+/* Adjust the relative import path depending on where you put this file.
+   If this component lives in src/components/ and your image is in src/assets/images/,
+   then '../assets/images/dog.png' is correct. */
+const { href = '/solo' } = Astro.props;
+
+---
+
+<style>
+.puppy {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  display: none;
+  z-index: 9999;
+}
+
+.puppy.visible {
+  display: block;
+}
+
+.puppy.visible img {
+  animation: wag 1s infinite alternate;
+}
+
+@keyframes wag {
+  from { transform: rotate(-6deg); }
+  to   { transform: rotate(6deg); }
+}
+
+
+</style>
+
+<!-- anchor + image -->
+<a class="puppy" href={href}>
+  <img src="public/dog.png" alt="Puppy" width="80" height="80" />
+</a>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const puppy = document.querySelector('.puppy');
+  if (puppy instanceof HTMLElement) {
+    puppy.classList.add('visible');
+  }
+});
+
+
+</script>

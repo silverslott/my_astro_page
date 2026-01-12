@@ -11,14 +11,14 @@ export const headerData = {
       icon: 'mdi:github'
     },
     {
-      text: 'LeoVegas',
-      href: 'https://www.leovegas.com/',
-      icon: 'mdi:slot-machine'
+      text: 'Family',
+      href: '/cats',
+      icon: 'mdi:cat'
     },
     {
-      text: 'LeoVegas Group',
-      href: 'https://leovegasgroup.com/',
-      icon: 'emojione-monotone:lion-face'
+      text: 'Home',
+      href: '/',
+      icon: 'mdi:home'
     }
   ]
 };

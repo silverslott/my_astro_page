@@ -1,0 +1,103 @@
+---
+
+import { Picture } from '@astrojs/image/components';
+import Tree from '~/assets/images/tree.jpeg'; 
+import Nap from '~/assets/images/nap.jpeg'; 
+import Sion from '~/assets/images/Sion-tree.jpeg';
+import Silke from '~/assets/images/Silke-tree.jpeg';
+
+
+const {
+  title = await Astro.slots.render('title'),
+  highlight,
+} = Astro.props;
+
+---
+
+<section class="relative bg-gradient-to-b from-white to-yellow-100">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="py-4 pt-8 sm:py-6 lg:py-8 lg:pt-12">
+      {
+        (title || highlight) && (
+          <div class="mb-8 md:mx-auto text-center max-w-3xl">
+            {highlight && (
+              <p
+                class="text-whitefont-semibold tracking-wide uppercase"
+                set:html={highlight}
+              />
+            )}
+            {title && (
+              <h2
+                class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading"
+                set:html={title}
+            />
+            )}
+          </div>
+        )
+      }
+      <p class="text-center text-xl">
+        Us!
+      </p>
+    </div>
+    <div class="px-2 py-6 grid grid-cols-4 max-sm:grid-cols-1 place-items-center">
+      {
+        <div class="relative m-auto max-w-5xl block">
+          <Picture
+            class="mx-auto rounded-full"
+            src={Tree}
+            widths={[400, 768, 1024, 2040]}
+            sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+            aspectRatio={1}
+            loading="eager"
+            width={250}
+            height={250}
+            alt="Kittens"
+          />
+        </div>
+      }
+      {
+        <div class="relative m-auto max-w-5xl block">
+          <Picture
+            class="mx-auto rounded-full"
+            src={Nap}
+            widths={[400, 768, 1024, 2040]}
+            sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+            aspectRatio={1}
+            loading="eager"
+            width={250}
+            height={250}
+            alt="Kittens"
+          />
+        </div>
+      }
+      {
+        <div class="relative m-auto max-w-5xl block">
+          <Picture
+            class="mx-auto rounded-full"
+            src={Sion}
+            widths={[400, 768, 1024, 2040]}
+            sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+            aspectRatio={1}
+            loading="eager"
+            width={250}
+            height={250}
+            alt="Kittens"
+          />
+        </div>
+      }
+      {
+        <div class="relative m-auto max-w-5xl block">
+          <Picture
+            class="mx-auto rounded-full"
+            src={Silke}
+            widths={[400, 768, 1024, 2040]}
+            sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+            aspectRatio={1}
+            loading="eager"
+            width={250}
+            height={250}
+            alt="Kittens"
+          />
+        </div>
+      }
+    </div>
