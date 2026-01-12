@@ -1,0 +1,129 @@
+---
+import { SITE } from '~/config.mjs';
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero_cats.astro';
+import Work from '~/components/widgets/Work.astro';
+import Dashboard from '~/components/widgets/Dashboard_cats.astro';
+import Gallery from '~/components/widgets/Cats_gallery.astro';
+import Skills from '~/components/widgets/Skills.astro';
+
+
+const meta = {
+  title: SITE.title,
+  dontUseTitleTemplate: true,
+};
+---
+
+<Layout {meta}>
+  <!-- Hero Widget ******************* -->
+  <title>Silke and Sion</title>
+    <div>
+      <Hero
+        image={{
+      }}
+      >
+      <Fragment slot="title">
+        <span>Sion and Silke</span>
+      </Fragment>
+      <Fragment slot="subtitle">
+        <span id="typing_cats"></span>
+      </Fragment>
+      </Hero>
+    </div>
+  
+  <!-- Skills Widget ************** -->
+
+  <Skills
+  title="Stack"
+  highlight="Technologies"
+  items={[
+    {
+      title: 'Elegant Ears',
+      description: 'Directional sound triangulation',
+      icon: 'emojione-monotone:cat-face-with-tears-of-joy',
+    },
+    {
+      title: 'Tail',
+      description: 'Expressive mood indicator with optional sass',
+      icon: 'fluent:animal-cat-16-filled',
+    },
+    {
+      title: 'Paws',
+      description: 'Soft-step locomotion with stealth mode enabled',
+      icon: 'icons8:cat-footprint',
+    },
+    {
+      title: 'Hypno-Eyes 2.0',
+      description: 'High success rate for treat acquisition',
+      icon: 'emojione-monotone:cat',
+    },
+    {
+      title: 'Meow Recognition System',
+      description: 'Adaptive vocal analytics tuned for humans',
+      icon: 'emojione-monotone:weary-cat-face',
+    },
+    {
+      title: 'NapOS',
+      description: 'Auto-launch every 90 minutes',
+      icon: 'mdi:sleep',
+    },
+    {
+      title: 'Human Cuddle API',
+      description: 'On-demand initialization (cat decides)',
+      icon: 'emojione-monotone:smiling-cat-face-with-heart-eyes',
+    },
+    {
+      title: 'Red Dot Detection Module',
+      description: 'High-speed tracking with erratic success',
+      icon: 'mdi:laser-pointer',
+    },
+    {
+      title: 'Cardboard Box Plug-ins',
+      description: 'Frequently adopted, rarely relinquished',
+      icon: 'teenyicons:box-solid',
+    }
+  ]}
+/>
+
+  <!-- Work Widget ************** -->
+
+  <Work
+    title="Life Experience"
+    items={[
+      {
+        title: 'January 2026 -<br>',
+        subtitle: 'Kitten Life',
+        description:
+          `Moved to our forever home and became part of the Silverslott family. 
+          Eating, playing, pooping, napping- in an endless loop.`,
+        icon: 'emojione-v1:cat',
+      },
+      {
+        title: '17th October 2025',
+        subtitle: 'Birth',
+        description:
+          `Born to mommy Echo and daddy Alfons along with our 5 siblings.`,
+        icon: 'noto-v1:baby-bottle',
+      }
+    ]}
+/>
+
+    <!-- Dashboard Widget ************** -->
+
+  <Dashboard
+    title="Kitten Stats"
+    highlight="Digital Analytics"
+  />
+
+  <!-- Videos Widget ************** -->
+
+  <Gallery
+    title="Selfies"
+    highlight="Gallery"
+  />
+
+
+</Layout>
+
+<script src="~/Cats_typewriter.js"></script>

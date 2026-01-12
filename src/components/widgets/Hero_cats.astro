@@ -1,0 +1,80 @@
+---
+import { Picture } from '@astrojs/image/components';
+import Cats from '~/assets/images/Silke-Sion.png';  
+
+interface CallToAction {
+  text: string;
+  href: string;
+  icon?: string;
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  callToAction?: string | CallToAction;
+  callToAction2?: string | CallToAction;
+  image?: string | any;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  image = await Astro.slots.render('image'),
+} = Astro.props;
+---
+
+<section class="relative md:-mt-[76px]">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+    <div class="grid grid-cols-1 max-sm:grid-cols-1 py-5 md:pt-[50px] md:pb-[50px]">
+      <div class="lg:col-span-2 md:col-span-2 max-sm:col-span-2 text-center max-w-screen-lg mx-auto lg:mt-0 md:mt-[20px]">
+        <div class="pb-5 md:pb-10">
+        {
+          image && (
+            <div class="relative m-auto max-w-5xl block">
+              {typeof image === 'string' ? (
+                <Fragment set:html={image} />
+              ) : (
+                <Picture
+                  class="mx-auto rounded-full"
+                  src={Cats}
+                  widths={[400, 768, 1024, 2040]}
+                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                  aspectRatio={1}
+                  loading="eager"
+                  width={400}
+                  height={400}
+                  alt="Kittens"
+                  {...image}
+                />
+              )}
+            </div>
+          )
+        }
+      </div>
+      <div class="text-2xl max-sm:mt-3">We are:</div>
+      <div class="text-center pt-2 max-w-screen-lg mx-auto">
+        {
+          title && (
+            <h1
+              class="text-5xl md:text-5xl max-sm:text-lg h-[1rem] md:h-[3rem] lg:h-[3rem] max-sm:h-[2.5rem]
+              font-bold font-bruno inline-block sofia-title"
+              set:html={title}
+            />
+          )
+        }
+        <div class="max-w-3xl mx-auto lg:h-[40px] md:h-[40px] max-sm:h-[40px]">
+          {subtitle && <h2 class="text-xl max-sm:text-xs md:text-xl mb-2 text-yellow-950 font-medium font-code" set:html={subtitle} />}
+        </div>
+      </div>
+    </div>
+    <div class="lg:columns-1 md:columns-1 md:col-span-4 max-sm:col-span-1 lg:mx-[170px] lg:mt-[40px] lg:mb-[30px] md:mx-[100px] max-sm:mx-[20px] lg:text-xl 
+      md:mt-[40px] max-sm:my-5 max-sm:text-center">
+      We are Silke Synaps and Sion Safir, a Seal Tabby Point Bicolor and Blue Tabby Point Mitted Ragdoll kitten. 
+      While mommy crunches numbers we crunch on kibble with the focus of tiny furry CEOs.
+      Our specialty? Turning data into delight, mainly by calculating the exact number of purrs needed 
+      to unlock a treat… and maybe a lap.
+    </div>
+  </div>
+</section>
