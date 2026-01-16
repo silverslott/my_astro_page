@@ -15,12 +15,16 @@ const { meta } = Astro.props;
 ---
 
 <Layout {meta}>
-  <div id="cookieConsent"><span style="font-size:1.2em;">Cookies anyone? 🍪&nbsp;</span>
-    <div class="space-y-2 sm:space-y-4 md:space-y-6">
-      <button id="acceptButton" class="block">Yes please!</button>
-      <button id="declineButton" class="block">No, thank you.</button>
-    </div>        
-  </div>
+  {Astro.url.pathname === '/' && (
+    <div id="cookieConsent">
+      <span style="font-size:1.2em;">Cookies anyone? 🍪&nbsp;</span>
+      <div class="space-y-2 sm:space-y-4 md:space-y-6">
+        <button id="acceptButton" class="block">Yes please!</button>
+        <button id="declineButton" class="block">No, thank you.</button>
+      </div>        
+    </div>
+  )}
+
   <slot name="header">
     <Header {...headerData} isSticky showRssFeed showToggleTheme />
   </slot>
